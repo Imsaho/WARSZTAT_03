@@ -1,0 +1,38 @@
+label {
+    display: block;
+}
+
+#books {
+    margin: auto;
+    width: 60%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    
+}
+
+/*.detail_row {
+    display: none;
+}*/
+
+td , th{
+    border: none;
+    text-align: left;
+    width: 25%;
+}
+
+.book_desc {
+    width: 100%;
+    opacity: 0.5;
+}
+
+.update_form {
+    text-align: center;
+}
+
+.details {
+    display: none;
+}
