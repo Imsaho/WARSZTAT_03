@@ -1,3 +1,10 @@
+body {
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    cursor: default;
+}
+
+
 label {
     display: block;
 }
@@ -7,16 +14,34 @@ label {
     width: 60%;
 }
 
+.book_title{
+    color: lightseagreen;
+    font-style: italic;
+}
+.book_title:hover {
+    font-weight: bold;
+}
+
+.remove_book:hover {
+    color: indianred;
+    font-weight: bold;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    border: none;
-    
+    border: none;    
 }
 
-/*.detail_row {
-    display: none;
-}*/
+.table_heading {
+    height: 30px;
+    background-color: #c2d4d2;
+    color: white;
+}
+
+#add_form {
+    text-align: center;
+}
 
 td , th{
     border: none;
@@ -27,12 +52,47 @@ td , th{
 .book_desc {
     width: 100%;
     opacity: 0.5;
+    padding: 15px;
 }
 
 .update_form {
     text-align: center;
+    border: 1px;
 }
 
+/*.update_book {
+    justify-content: center;
+}*/
+
 .details {
+    background-color: #f3f3f3;
     display: none;
 }
+
+input, textarea, button, label{
+    width: 300px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+button {
+    border: none;
+    background-color: lightseagreen;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+#title {
+    margin: auto;
+    width: 60%;
+}
+

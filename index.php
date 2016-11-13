@@ -1,7 +1,4 @@
-<?php
-
-?>
-
+<?php ?>
 
 <!DOCTYPE html>
 <html>
@@ -15,38 +12,39 @@
         <title></title>
     </head>
     <body>
-        <h1>Książki</h1>
-        <div id="json"></div>
-        
-        <div>
-        <form class="add_form" action="./api/books.php" method="POST">
-            <label>author:
-                <input type="text" name="author"/></input>
-            </label>
-            <label>title:
-                <input type="text" name="title"/></input>
-            </label>
-            <label>description:
-                <textarea maxlength="1000" name="book_desc"/></textarea>
-            </label>
-            <label>genre:
-                <input type="text" name="genre"></input>
-            </label>
-            <button name="submit">Add book</button>
-        </form>
+        <div id="title">
+            <h1>Biblioteka</h1>    
         </div>
-       
+
+        <div id="add_form">
+            <form class="add_form" action="./api/books.php" method="POST">
+                <label>autor:
+                    <input type="text" name="author"/></input>
+                </label>
+                <label>tytuł:
+                    <input type="text" name="title"/></input>
+                </label>
+                <label>opis fabuły:
+                    <textarea maxlength="1000" name="book_desc"/></textarea>
+                </label>
+                <label>gatunek:
+                    <input type="text" name="genre"></input>
+                </label>
+                <button name="submit">Dodaj książkę</button>
+            </form>
+        </div>
+
         <hr>
-        
+
         <div id="books">
-        <table border="1" cellspacing="4" cellpadding="4">
-            <tr>
-                <th>Autor</th>
-                <th>Tytuł</th>
-                <th>Gatunek</th>
-                <th></th>
-            </tr>
-        </table>
+            <table class="table_heading">
+                <tr>
+                    <th>autor</th>
+                    <th>tytuł</th>
+                    <th>gatunek</th>
+                    <th></th>
+                </tr>
+            </table>
         </div>
 
     </body>

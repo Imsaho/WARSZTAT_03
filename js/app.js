@@ -1,24 +1,20 @@
 
-
 $(document).ready(function () {
 
     var form = $(document).find('form');
-    //console.log(form);
     var updateForm = $(form).clone();
-    //console.log(updateForm);
-    $(updateForm).find('button').text('Update book');
+    $(updateForm).find('button').text('Aktualizuj informacje');
     $(updateForm).find('button').attr('id', 'btn2');
     $(updateForm).attr('class', 'update_form');
     $(updateForm).find('input[name=author]').attr('name', 'update_author');
     $(updateForm).find('input[name=title]').attr('name', 'update_title');
     $(updateForm).find('textarea[name=book_desc]').attr('name', 'update_book_desc');
     $(updateForm).find('input[name=genre]').attr('name', 'update_genre');
-    //$(updateForm).find();
-    console.log(updateForm);
+
+    var tableHeading = $('.table_heading').clone();
 
 // funkcja, która wczytuje listę wszystkich książek z bazy danych
     function loadAllBooks() {
-        //var updateForm = "";
         $.get('http://localhost/WARSZTAT_03/api/books.php', function (json) {
             var books = $.parseJSON(json);
             for (var i = 0; i < books.length; i++) {
@@ -27,10 +23,10 @@ $(document).ready(function () {
                         + '</td><td class="book_title">'
                         + books[i].name
                         + '</td><td>' + books[i].genre
-                        + '<td class="remove_book">remove</td>'
+                        + '<td class="remove_book">usuń</td>'
                         + '</td></tr></table>'
-                        + '<div class="details"><div class="book_desc">asdasd</div>'
-                        + '<div class="update_book">asdasd</div></div>');
+                        + '<div class="details"><div class="book_desc"></div>'
+                        + '<div class="update_book"></div></div>');
                 $('#books').append($(book));
             }
         });
@@ -41,12 +37,14 @@ $(document).ready(function () {
 
 //po kliknięciu na tytuł rozwija pole z opisem książki
     $(document).on('click', ".book_title", function () {
-        $(this).parent().parent().parent().next().slideToggle();
+        $(this).parent().parent().parent().parent().find('.details').slideUp(500);
+        $(this).parent().parent().parent().next().slideToggle(500);
+
         var descriptionDiv = $(this).parent().parent().parent().next().find('.book_desc');
         var updateBookDiv = $(this).parent().parent().parent().next().find('.update_book');
-        //console.log(descriptionDiv);
         var bookId = $(this).parent().data("book-id");
         var endpoint = "http://localhost/WARSZTAT_03/api/books.php?id=" + bookId;
+
         $.get(endpoint, function (json) {
             var book = $.parseJSON(json);
             var bookDescription = book.book_desc;
@@ -72,7 +70,7 @@ $(document).ready(function () {
         })
                 .done(function (data) {
                     if (data.success === true) {
-                        $('#books').html("<table><tr><th>Autor</th><th>Tytuł</th><th>Opis</th><th></th></tr></table>");
+                        $('#books').html(tableHeading);
                         loadAllBooks();
                         $('form').trigger("reset");
                     }
@@ -80,9 +78,9 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
+// aktualizacja informacji o danej 
     $(document).on('click', '#btn2', function (event) {
         var bookId = $(this).parent().parent().parent().prev().find('tr').data("book-id");
-        console.log(bookId);
 
         var formData = {
             'id': bookId,
@@ -92,7 +90,6 @@ $(document).ready(function () {
             'genre': $('input[name=update_genre]').val()
         };
 
-        console.log(formData);
         $.ajax({
             type: 'PUT',
             url: "http://localhost/WARSZTAT_03/api/books.php",
@@ -100,8 +97,7 @@ $(document).ready(function () {
             dataType: 'json'
         })
                 .done(function (json) {
-                    //console.log(json);
-                    $('#books').html("<table><tr><th>Autor</th><th>Tytuł</th><th>Opis</th><th></th></tr></table>");
+                    $('#books').html(tableHeading);
                     loadAllBooks();
                     $('#btn2').trigger("reset");
                 });
@@ -116,10 +112,10 @@ $(document).ready(function () {
             type: 'DELETE',
             url: "http://localhost/WARSZTAT_03/api/books.php",
             data: {id: bookId},
-            dataType: '',
+            dataType: ''
         })
                 .done(function () {
-                    $('#books').html("<table><tr><th>Autor</th><th>Tytuł</th><th>Gatunek</th><th></th></tr></table>");
+                    $('#books').html(tableHeading);
                     loadAllBooks();
                 });
     });
