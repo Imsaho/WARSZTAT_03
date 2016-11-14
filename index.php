@@ -18,18 +18,14 @@
 
         <div id="add_form">
             <form class="add_form" action="./api/books.php" method="POST">
-                <label>autor:
-                    <input type="text" name="author"/></input>
-                </label>
-                <label>tytuł:
-                    <input type="text" name="title"/></input>
-                </label>
-                <label>opis fabuły:
-                    <textarea maxlength="1000" name="book_desc"/></textarea>
-                </label>
-                <label>gatunek:
-                    <input type="text" name="genre"></input>
-                </label>
+                <label>autor:</label>
+                <input type="text" name="author"/></input>
+                <label>tytuł:</label>
+                <input type="text" name="title"/></input>
+                <label>opis fabuły:</label>
+                <textarea maxlength="1000" name="book_desc"/></textarea>
+                <label>gatunek:</label>
+                <input type="text" name="genre"></input><br>
                 <button name="submit">Dodaj książkę</button>
             </form>
         </div>
