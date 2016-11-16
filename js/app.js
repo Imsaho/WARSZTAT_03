@@ -22,11 +22,11 @@ $(document).ready(function () {
                         + '</td><td class="book_title">'
                         + books[i].name
                         + '</td><td>' + books[i].genre
-                        + '<td class="remove_book">usuń</td>'
+                        + '<td class="remove_book"  data-book-id="' + books[i].id + '">usuń</td>'
                         + '</td></tr></table>'
                         + '<div class="details"  data-book-id="' + books[i].id + '">'
-                        + '<div class="book_desc"></div>'
-                        + '<div class="update_book"></div></div>');
+                        + '<div class="book_desc">' + books[i].book_desc + '</div>'
+                        + '<div class="update_book" data-book-id="' + books[i].id + '"></div></div>');
                 $('#books').append($(book));
             }
         });
@@ -41,15 +41,12 @@ $(document).ready(function () {
         var detailsDiv = $(this).parentsUntil('#books').next();
         detailsDiv.slideToggle(500);
 
-        var descriptionDiv = detailsDiv.find('.book_desc');
         var updateBookDiv = detailsDiv.find('.update_book');
         var bookId = detailsDiv.data("book-id");
         var newEndpoint = endpoint + "?id=" + bookId;
 
         $.get(newEndpoint, function (json) {
             var book = $.parseJSON(json);
-            var bookDescription = book.book_desc;
-            $(descriptionDiv).text(bookDescription);
             $(updateBookDiv).html(updateForm);
         });
     });
@@ -81,7 +78,7 @@ $(document).ready(function () {
 
 // aktualizacja informacji o danej książce
     $(document).on('click', '#btn2', function (event) {
-        var bookId = $(this).parentsUntil('#books', '.details').data('book-id');
+        var bookId = $(this).parent().parent().data('book-id');
         event.preventDefault();
 
         var formData = {
@@ -107,7 +104,7 @@ $(document).ready(function () {
 
 //po kliknięciu na "remove" zostaje usunięta ksiazka o wskazanym id
     $(document).on('click', '.remove_book', function () {
-        var bookId = $(this).parentsUntil('#books').next().data("book-id");
+        var bookId = $(this).data("book-id");
 
         $.ajax({
             type: 'DELETE',
